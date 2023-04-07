@@ -11,6 +11,19 @@ export default {
 				"secondary": "#FFC93C",
 				"dark": "#222222"
 			},
+			animation: {
+				slide: "slide .5s",
+			},
+			keyframes: {
+				slide: {
+					"0%": {
+						transform: "translateX(100%)",
+					},
+					"100%": {
+						transform: "translateX(0)",
+					}
+				}
+			}
 		},
 	},
 	plugins: [],
