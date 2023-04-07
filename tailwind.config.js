@@ -23,6 +23,9 @@ export default {
 						transform: "translateX(0)",
 					}
 				}
+			},
+			aspectRatio: {
+				certificate: "611 / 433",
 			}
 		},
 	},

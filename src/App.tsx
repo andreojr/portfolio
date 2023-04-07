@@ -7,33 +7,18 @@ import githublogo from "./assets/github.svg";
 import group_technologies from "./assets/group_technologies.svg";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
-// import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { ArrowDown, CaretDown, List } from "@phosphor-icons/react";
 import aprovacao_ufba from "./assets/aprovacao_ufba.svg" ;
 
 import { TextAlignRight, Code, ChatsCircle } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-
-// interface AttributesParentToggleItem {
-// 	"data-state": {
-// 		value: "on" | "off";
-// 	};
-// }
-
+import { Certificates } from "./components/Certificates";
 function App() {
 	const [lang, setLang] = useState<"pt" | "en">("pt");
 
 	useEffect(() => {
 		document.documentElement.lang = lang;
 	}, [lang]);
-
-	// function handleNotNullLang(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-	// 	const element = e.target as Element;
-	// 	if (element.parentElement) {
-	// 		const stateElement = element.parentElement.attributes as unknown as AttributesParentToggleItem;
-	// 		if (stateElement["data-state"].value === "on") return e.preventDefault();
-	// 	}
-	// }
 
 	function handleChangeLang(change_lang: "pt" | "en") {
 		setLang(change_lang);
@@ -44,27 +29,6 @@ function App() {
 			<section className="flex flex-col lg:flex-row">
 				<div className="bg-primary lg:w-3/5 px-12 py-10 lg:pr-0 lg:pb-0 2xl:pl-80">
 					<header className="relative flex items-center justify-between h-20 lg:pr-12">
-
-						{/* <ToggleGroup.Root
-							
-							type="single"
-							className="flex lg:order-2 bg-dark rounded-sm"
-							defaultValue={lang}
-							onValueChange={(value: "pt" | "en") => setLang(value) }
-						>
-							<ToggleGroup.Item
-								className="rounded-tl-sm rounded-bl-sm p-0.5 bg-dark data-[state=off]:opacity-50 data-[state=on]:bg-white" value="en" aria-label="USA Flag"
-								onClick={handleNotNullLang}
-							>
-								<img className="h-5" src={eua_flag} alt="USA Flag" />
-							</ToggleGroup.Item>
-							<ToggleGroup.Item
-								className="rounded-tr-sm rounded-br-sm p-0.5 bg-dark data-[state=off]:opacity-50 data-[state=on]:bg-white" value="pt" aria-label="Bandeira do Brasil"
-								onClick={handleNotNullLang}
-							>
-								<img className="h-5" src={brazil_flag} alt="Bandeira do Brasil" />
-							</ToggleGroup.Item>
-						</ToggleGroup.Root> */}
 
 						<DropdownMenu.Root>
 							<DropdownMenu.Trigger className="lg:order-2">
@@ -217,22 +181,55 @@ function App() {
 					</div>
 				</div>
 			</section>
-			<section className="bg-secondary">
-				<div className="flex flex-col lg:flex-row px-12 py-24 2xl:px-80">
-					<img className="order-2 lg:order-1 mt-8 lg:mt-0" src={aprovacao_ufba} alt="Aprovação na UFBA" />
+			<section className="bg-secondary px-12 py-24 2xl:px-80">
+				<div className="flex flex-col lg:flex-row">
+					<img className="order-2 lg:order-1 mt-8 lg:mt-0 rounded-lg drop-shadow-2xl" src={aprovacao_ufba} alt="Aprovação na UFBA" />
 					<div className="flex order-1 lg:order-2 lg:ml-20">
 						<div className="relative flex flex-col items-center">
 							<div className="w-5 h-5 bg-dark rounded-full" />
 							<div className="w-1 h-64 lg:h-80 bg-dark rounded-full -mt-1" />
 							<ArrowDown className="-mt-10 text-dark" size={50} />
 						</div>
-						<div className="text-dark">
-							<p className="text-xl lg:text-2xl">Aprovado na</p>
+						<div className="text-dark ml-2">
+							<p className="text-xl lg:text-2xl">
+								{lang === "pt" && "Aprovado na"}
+								{lang === "en" && "Approved at"}
+							</p>
 							<h3 className="text-8xl lg:text-9xl font-black">UFBA</h3>
 							<p className="text-6xl lg:text-7xl my-2 font-black">2023</p>
-							<p className="text-2xl lg:text-3xl font-black">em Engenharia da Computação</p>
+							<p className="text-2xl lg:text-3xl font-black">
+								{lang === "pt" && "em Engenharia da Computação"}
+								{lang === "en" && "in Computer Engineering"}
+							</p>
 						</div>
 					</div>
+				</div>
+				<div className="flex flex-col gap-10 lg:flex-row mt-24 lg:mt-0 items-end">
+					<div className="lg:w-1/2">
+						<h4 className="text-dark font-black text-5xl lg:text-7xl">
+							{lang === "pt" && "SOBRE MIM"}
+							{lang === "en" && "ABOUT ME"}
+						</h4>
+						<p className="leading-8 lg:leading-8 text-justify mt-6 text-lg lg:text-xl">
+							{lang === "pt" && (
+								<>
+									Meu nome é André, tenho 18 anos e moro em Salvador. Possuo conhecimentos sólidos em Python, PHP, JavaScript e frameworks derivados como Node, Express, React e React Native, além de HTML/CSS e bancos de dados relacionais como MySQL e PostgreSQL. Estou à procura de um estágio na área a fim de evoluir como profissional e agregar valor à empresa que me escolher.
+									<br />
+									<br />
+									Tenho facilidade em trabalhar em equipe, boa comunicação e proatividade, além de habilidades analíticas e de resolução de problemas. Entendo que, para me destacar no mercado de trabalho, é importante que eu invista em uma formação sólida, participar de projetos e eventos relacionados à área e me manter sempre atualizado sobre as novas tendências e tecnologias emergentes.
+								</>
+							)}
+							{lang === "en" && (
+								<>
+									My name is André, I'm 18 years old and I live in Salvador. I have solid knowledge in Python, PHP, JavaScript and derived frameworks such as Node, Express, React and React Native, as well as HTML / CSS and relational databases such as MySQL and PostgreSQL. I'm looking for an internship in the area in order to evolve as a professional and add value to the company that chooses me.
+									<br />
+									<br />
+									I enjoy teamwork, good communication and proactivity, as well as analytical and problem-solving skills. I understand that, in order to stand out in the job market, it is important that I invest in a solid education, participate in projects and events in the area and always keep myself updated on new trends and emerging technologies.
+								</>
+							)}
+						</p>
+					</div>
+					<Certificates lang={lang} />
 				</div>
 			</section>
 		</div>
