@@ -261,7 +261,7 @@ function App() {
 						<div className="z-50 relative bg-primary p-6 lg:p-8 text-white flex justify-between lg:items-center rounded-xl">
 							<div>
 								<h4 className="text-2xl lg:text-4xl font-black">CONTATE-ME</h4>
-								<p className="text-sm lg:text-base">Powered by ME with TelegrafJS</p>
+								<p className="text-sm lg:text-base">Powered by ME</p>
 							</div>
 							<div className="flex lg:items-center lg:gap-2 font-bold flex-col lg:flex-row items-end">
 								<div className="order-2 lg:order-1">
