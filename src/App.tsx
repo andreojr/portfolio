@@ -7,15 +7,35 @@ import githublogo from "./assets/github.svg";
 import group_technologies from "./assets/group_technologies.svg";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ArrowDown, CaretDown, List } from "@phosphor-icons/react";
+import { ArrowDown, CaretDown, Clock, List } from "@phosphor-icons/react";
 import aprovacao_ufba from "./assets/aprovacao_ufba.svg" ;
 
 import { TextAlignRight, Code, ChatsCircle } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { Certificates } from "./components/Certificates";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
+import { SendMessageBox } from "./components/SendMessageBox";
+import { Chat } from "./components/Chat";
+import axios from "axios";
+
+export type MessagesProps = {
+    id: string;
+    content: string;
+    by: string;
+    to: string;
+    created_at: Date;
+}[];
+
 function App() {
 	const [lang, setLang] = useState<"pt" | "en">("pt");
+	const [ip, setIp] = useState("");
+	const [messages, setMessages] = useState<MessagesProps | undefined>(undefined);
 
+	useEffect(() => {
+		axios.get("https://api.ipify.org/?format=json").then(response => {
+			setIp(response.data.ip);
+		});
+	}, []);
 	useEffect(() => {
 		document.documentElement.lang = lang;
 	}, [lang]);
@@ -76,24 +96,24 @@ function App() {
 										<ul className="text-dark text-xl flex flex-col gap-10">
 											<li className="cursor-pointer flex gap-1 items-center">
 												<TextAlignRight size={24} />
-												<span>
+												<a href="#about">
 													{lang === "pt" && "Sobre"}
 													{lang === "en" && "About"}
-												</span>
+												</a>
 											</li>
 											<li className="cursor-pointer flex gap-1 items-center">
 												<Code size={24} />
-												<span>
+												<a href="#">
 													{lang === "pt" && "Projetos"}
 													{lang === "en" && "Projects"}
-												</span>
+												</a>
 											</li>
 											<li className="cursor-pointer flex gap-1 items-center">
 												<ChatsCircle size={24} />
-												<span>
+												<a href="#">
 													{lang === "pt" && "Contato"}
 													{lang === "en" && "Contact"}
-												</span>
+												</a>
 											</li>
 										</ul>
 									</nav>
@@ -135,22 +155,22 @@ function App() {
 					<nav className="hidden lg:flex h-20 items-center">
 						<ul className="flex gap-8 items-center text-white text-base xl:text-xl">
 							<li className="cursor-pointer flex gap-1 items-center"><TextAlignRight size={24} />
-								<span>
+								<a href="#about">
 									{lang === "pt" && "Sobre"}
 									{lang === "en" && "About"}
-								</span>
+								</a>
 							</li>
 							<li className="cursor-pointer flex gap-1 items-center"><Code size={24} />
-								<span>
+								<a href="">
 									{lang === "pt" && "Projetos"}
 									{lang === "en" && "Projects"}
-								</span>
+								</a>
 							</li>
 							<li className="cursor-pointer flex gap-1 items-center"><ChatsCircle size={24} />
-								<span>
+								<a href="">
 									{lang === "pt" && "Contato"}
 									{lang === "en" && "Contact"}
-								</span>
+								</a>
 							</li>
 						</ul>
 					</nav>
@@ -181,7 +201,7 @@ function App() {
 					</div>
 				</div>
 			</section>
-			<section className="bg-secondary px-12 py-24 2xl:px-80">
+			<section className="bg-secondary px-12 py-24 2xl:px-80" id="about">
 				<div className="flex flex-col lg:flex-row">
 					<img className="order-2 lg:order-1 mt-8 lg:mt-0 rounded-lg drop-shadow-2xl" src={aprovacao_ufba} alt="Aprovação na UFBA" />
 					<div className="flex order-1 lg:order-2 lg:ml-20">
@@ -221,7 +241,7 @@ function App() {
 							)}
 							{lang === "en" && (
 								<>
-									My name is André, I'm 18 years old and I live in Salvador. I have solid knowledge in Python, PHP, JavaScript and derived frameworks such as Node, Express, React and React Native, as well as HTML / CSS and relational databases such as MySQL and PostgreSQL. I'm looking for an internship in the area in order to evolve as a professional and add value to the company that chooses me.
+									My name is André, I&apos;m 18 years old and I live in Salvador. I have solid knowledge in Python, PHP, JavaScript and derived frameworks such as Node, Express, React and React Native, as well as HTML / CSS and relational databases such as MySQL and PostgreSQL. I&apos;m looking for an internship in the area in order to evolve as a professional and add value to the company that chooses me.
 									<br />
 									<br />
 									I enjoy teamwork, good communication and proactivity, as well as analytical and problem-solving skills. I understand that, in order to stand out in the job market, it is important that I invest in a solid education, participate in projects and events in the area and always keep myself updated on new trends and emerging technologies.
@@ -230,6 +250,45 @@ function App() {
 						</p>
 					</div>
 					<Certificates lang={lang} />
+				</div>
+			</section>
+			<section className="flex flex-col lg:flex-row bg-white px-12 py-24 2xl:px-80 gap-24">
+				<div className="lg:w-2/5 text-5xl text-secondary font-black">
+					<h4>HABILIDADES</h4>
+				</div>
+				<div className="lg:w-3/5">
+					<div>
+						<div className="z-50 relative bg-primary p-6 lg:p-8 text-white flex justify-between lg:items-center rounded-xl">
+							<div>
+								<h4 className="text-2xl lg:text-4xl font-black">CONTATE-ME</h4>
+								<p className="text-sm lg:text-base">Powered by ME with TelegrafJS</p>
+							</div>
+							<div className="flex lg:items-center lg:gap-2 font-bold flex-col lg:flex-row items-end">
+								<div className="order-2 lg:order-1">
+									<span className="text-base lg:text-5xl">&lt;5{" "}</span>
+									<span className="text-xs lg:hidden">MIN.</span>
+								</div>
+								<div className="flex-col hidden lg:flex lg:order-2">
+									<span className="text-sm lg:text-lg">MINUTOS</span>
+									<span className="text-xs lg:text-base">DE ESPERA</span>
+								</div>
+								<Clock weight="fill" className="text-3xl lg:text-5xl lg:order-3 order-1" />
+							</div>
+						</div>
+						<ScrollArea.Root className="!static h-[40rem] overflow-hidden -mt-10">
+							<ScrollArea.Viewport className="w-full h-full bg-slate-200 py-16 px-8">
+								{ip && <Chat ip={ip} messages={messages} setMessages={setMessages} />}
+							</ScrollArea.Viewport>
+							<ScrollArea.Scrollbar orientation="vertical">
+								<ScrollArea.Thumb />
+							</ScrollArea.Scrollbar>
+							<ScrollArea.Scrollbar orientation="horizontal">
+								<ScrollArea.Thumb />
+							</ScrollArea.Scrollbar>
+							<ScrollArea.Corner />
+						</ScrollArea.Root>
+						<SendMessageBox ip={ip} setMessages={setMessages} />
+					</div>
 				</div>
 			</section>
 		</div>
