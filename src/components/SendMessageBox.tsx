@@ -7,9 +7,10 @@ interface SendMessageBoxProps {
     ip: string;
 	setMessages: React.Dispatch<React.SetStateAction<MessagesProps | undefined>>;
 	textArea: MutableRefObject<HTMLTextAreaElement | null>;
+	lang: "pt" | "en";
 }
 
-export function SendMessageBox({ ip, setMessages, textArea }: SendMessageBoxProps) {
+export function SendMessageBox({ ip, setMessages, textArea, lang }: SendMessageBoxProps) {
 	const [texting, setTexting] = useState("");
 
 	async function sendMessage() {		
@@ -40,13 +41,16 @@ export function SendMessageBox({ ip, setMessages, textArea }: SendMessageBoxProp
 			<textarea
 				ref={textArea}
 				className="w-full h-32 rounded-xl resize-none p-4 focus:outline-none border-2 focus:border-secondary"
-				placeholder="Escreva sua mensagem aqui..."
+				placeholder={(lang === "pt" && "Escreva sua mensagem aqui...") || (lang === "en" && "Write your message here...") || ""}
 				value={texting}
 				onChange={e => setTexting(e.target.value)}
 				onKeyDown={e => {if (e.key === "Enter" && !e.shiftKey) sendMessage(); }}
 			/>
 			<button onClick={sendMessage} className="rounded-xl w-full h-14 bg-secondary flex items-center justify-center hover:drop-shadow-md transition-all">
-				<span className="text-white text-lg font-bold mr-3">Enviar</span>
+				<span className="text-white text-lg font-bold mr-3">
+					{lang === "pt" && "Enviar"}
+					{lang === "en" && "Send"}
+				</span>
 				<PaperPlane weight="fill" className="text-white text-xl rotate-90" />
 			</button>
 		</div>

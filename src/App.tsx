@@ -8,7 +8,7 @@ import githublogo from "./assets/github.svg";
 import group_technologies from "./assets/group_technologies.svg";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ArrowDown, CaretDown, Clock, List } from "@phosphor-icons/react";
+import { ArrowDown, CaretDown, Clock, Copyright, Envelope, InstagramLogo, LinkedinLogo, List, MapPin, Phone, WhatsappLogo } from "@phosphor-icons/react";
 import aprovacao_ufba from "./assets/aprovacao_ufba.svg" ;
 
 import { TextAlignRight, Code, ChatsCircle } from "@phosphor-icons/react";
@@ -54,7 +54,7 @@ function App() {
 		<div className="App w-full h-screen bg-dark font-poppins">
 			<section className="flex flex-col lg:flex-row">
 				<div className="bg-primary lg:w-3/5 px-12 py-10 lg:pr-0 lg:pb-0 2xl:pl-80">
-					<header className="relative flex items-center justify-between h-20 lg:pr-12">
+					<header className="flex items-center justify-between h-20 lg:pr-12">
 
 						<DropdownMenu.Root>
 							<DropdownMenu.Trigger className="lg:order-2">
@@ -116,7 +116,7 @@ function App() {
 											</li>
 											<li className="cursor-pointer flex gap-1 items-center">
 												<ChatsCircle size={24} />
-												<a href="#">
+												<a href="#contact">
 													{lang === "pt" && "Contato"}
 													{lang === "en" && "Contact"}
 												</a>
@@ -167,13 +167,13 @@ function App() {
 								</a>
 							</li>
 							<li className="cursor-pointer flex gap-1 items-center"><Code size={24} />
-								<a href="">
+								<a href="#">
 									{lang === "pt" && "Projetos"}
 									{lang === "en" && "Projects"}
 								</a>
 							</li>
 							<li className="cursor-pointer flex gap-1 items-center"><ChatsCircle size={24} />
-								<a href="">
+								<a href="#contact">
 									{lang === "pt" && "Contato"}
 									{lang === "en" && "Contact"}
 								</a>
@@ -258,16 +258,26 @@ function App() {
 					<Certificates lang={lang} />
 				</div>
 			</section>
-			<section className="flex flex-col lg:flex-row bg-white px-12 py-24 2xl:px-80 gap-24">
+			<S
+			<section className="flex flex-col lg:flex-row bg-white px-12 py-24 2xl:px-80 gap-24" id="contact">
 				<div className="lg:w-2/5 text-5xl text-secondary font-black">
-					<h4>HABILIDADES</h4>
+					<h4>
+						{lang === "pt" && "HABILIDADES"}
+						{lang === "en" && "ABILITIES"}
+					</h4>
 				</div>
 				<div className="lg:w-3/5">
 					<div>
 						<div className="z-50 relative bg-primary p-6 lg:p-8 text-white flex justify-between lg:items-center rounded-xl">
 							<div>
-								<h4 className="text-2xl lg:text-4xl font-black">CONTATE-ME</h4>
-								<p className="text-sm lg:text-base">Powered by ME</p>
+								<h4 className="text-2xl lg:text-4xl font-black">
+									{lang === "pt" && "CONTATE-ME"}
+									{lang === "en" && "CONTACT ME"}
+								</h4>
+								<p className="text-sm lg:text-base">
+									{lang === "pt" && "Feito por MIM"}
+									{lang === "en" && "Powered by ME"}
+								</p>
 							</div>
 							<div className="flex lg:items-center lg:gap-2 font-bold flex-col lg:flex-row items-end">
 								<div className="order-2 lg:order-1">
@@ -275,8 +285,14 @@ function App() {
 									<span className="text-xs lg:hidden">MIN.</span>
 								</div>
 								<div className="flex-col hidden lg:flex lg:order-2">
-									<span className="text-sm lg:text-lg">MINUTOS</span>
-									<span className="text-xs lg:text-base">DE ESPERA</span>
+									<span className="text-sm lg:text-lg">
+										{lang === "pt" && "MINUTOS"}
+										{lang === "en" && "MINUTES"}
+									</span>
+									<span className="text-xs lg:text-base">
+										{lang ==="pt" && "DE ESPERA"}
+										{lang === "en" && "WAIT"}
+									</span>
 								</div>
 								<Clock weight="fill" className="text-3xl lg:text-5xl lg:order-3 order-1" />
 							</div>
@@ -293,10 +309,39 @@ function App() {
 							</ScrollArea.Scrollbar>
 							<ScrollArea.Corner />
 						</ScrollArea.Root>
-						<SendMessageBox ip={ip} setMessages={setMessages} textArea={textArea} />
+						<SendMessageBox ip={ip} setMessages={setMessages} textArea={textArea} lang={lang} />
 					</div>
 				</div>
 			</section>
+			<footer className="bg-dark px-12 py-8 2xl:px-80 flex justify-between">
+				<div className="flex items-center gap-5">
+					<img src={logo} alt="Logo" className="h-7" />
+					<span className="text-white flex items-center gap-1">
+						{lang === "pt" && "Todos os direitos reservados"}
+						{lang === "en" && "All rights reserved"}
+						<Copyright size={16} />
+					</span>
+				</div>
+				<div className="flex items-center gap-10">
+					<a href="tel:71984788575" className="text-white flex items-center gap-2">
+						<Phone size={24} weight="fill" />
+						<span>(71) 9 8478-8575</span>
+					</a>
+					<a href="mailto:atipicode.ec@gmail.com" className="text-white flex items-center gap-2">
+						<Envelope size={24} weight="fill" />
+						<span>atipicode.ec@gmail.com</span>
+					</a>
+					<a href="https://goo.gl/maps/CGerKX5ZKfA6Ahvt8" target="__blank" className="text-white flex items-center gap-2">
+						<MapPin size={24} weight="fill" />
+						<span>Costa Azul, Salvador - BA</span>
+					</a>
+				</div>
+				<div className="text-white flex gap-5 items-center">
+					<a href="https://instagram.com/eiandreojr" target="__blank"><InstagramLogo size={24} weight="fill" className="text-pink-400" /></a>
+					<a href="https://linkedin.com/in/andreojr" target="__blank"><LinkedinLogo size={24} weight="fill" className="text-blue-400" /></a>
+					<a href="https://wa.me/5571984760838?text=Ol%C3%A1%2C+Andr%C3%A9%21+Temos+uma+oportunidade+para+voc%C3%AA." target="__blank"><WhatsappLogo size={24} weight="fill" className="text-green-500" /></a>
+				</div>
+			</footer>
 		</div>
 	);
 }
