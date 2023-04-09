@@ -1,3 +1,4 @@
+import "./lib/dayjs"; 
 import logo from "./assets/logo.svg";
 import eua_flag from "./assets/eua_flag.svg";
 import brazil_flag from "./assets/brazil_flag.svg";
@@ -11,7 +12,7 @@ import { ArrowDown, CaretDown, Clock, List } from "@phosphor-icons/react";
 import aprovacao_ufba from "./assets/aprovacao_ufba.svg" ;
 
 import { TextAlignRight, Code, ChatsCircle } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Certificates } from "./components/Certificates";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { SendMessageBox } from "./components/SendMessageBox";
@@ -23,13 +24,15 @@ export type MessagesProps = {
     content: string;
     by: string;
     to: string;
-    created_at: Date;
+    created_at: string;
 }[];
 
 function App() {
 	const [lang, setLang] = useState<"pt" | "en">("pt");
 	const [ip, setIp] = useState("");
 	const [messages, setMessages] = useState<MessagesProps | undefined>(undefined);
+	const scrollChat = useRef<HTMLDivElement | null>(null);
+	const textArea = useRef<HTMLTextAreaElement | null>(null);
 
 	useEffect(() => {
 		axios.get("https://api.ipify.org/?format=json").then(response => {
@@ -39,6 +42,9 @@ function App() {
 	useEffect(() => {
 		document.documentElement.lang = lang;
 	}, [lang]);
+	useEffect(() => {
+		scrollChat.current?.scrollTo({ top: scrollChat.current.scrollHeight - scrollChat.current.clientHeight });
+	}, [messages]);
 
 	function handleChangeLang(change_lang: "pt" | "en") {
 		setLang(change_lang);
@@ -276,7 +282,7 @@ function App() {
 							</div>
 						</div>
 						<ScrollArea.Root className="!static h-[40rem] overflow-hidden -mt-10">
-							<ScrollArea.Viewport className="w-full h-full bg-slate-200 py-16 px-8">
+							<ScrollArea.Viewport ref={scrollChat} className="w-full h-full bg-slate-200 py-16 px-8">
 								{ip && <Chat ip={ip} messages={messages} setMessages={setMessages} />}
 							</ScrollArea.Viewport>
 							<ScrollArea.Scrollbar orientation="vertical">
@@ -287,7 +293,7 @@ function App() {
 							</ScrollArea.Scrollbar>
 							<ScrollArea.Corner />
 						</ScrollArea.Root>
-						<SendMessageBox ip={ip} setMessages={setMessages} />
+						<SendMessageBox ip={ip} setMessages={setMessages} textArea={textArea} />
 					</div>
 				</div>
 			</section>
