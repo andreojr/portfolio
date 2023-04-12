@@ -10,6 +10,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowDown, CaretDown, Clock, Copyright, Envelope, InstagramLogo, LinkedinLogo, List, MapPin, Phone, WhatsappLogo } from "@phosphor-icons/react";
 import aprovacao_ufba from "./assets/aprovacao_ufba.svg" ;
+import no_projects from "./assets/no-projects.svg"
 
 import { TextAlignRight, Code, ChatsCircle } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
@@ -18,6 +19,10 @@ import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { SendMessageBox } from "./components/SendMessageBox";
 import { Chat } from "./components/Chat";
 import axios from "axios";
+import { abilitiesList } from "./utils/abilitiesList";
+import clsx from "clsx";
+import { projectsList } from "./utils/projectsList";
+import HorizontalScroll from "react-scroll-horizontal";
 
 export type MessagesProps = {
     id: string;
@@ -258,13 +263,119 @@ function App() {
 					<Certificates lang={lang} />
 				</div>
 			</section>
-			<S
+
+			<section className="flex flex-col lg:flex-row bg-terciary pl-12 pt-24 lg:pb-24 2xl:pl-80 gap-24 w-full">
+				<div className="lg:w-1/3 flex flex-col pr-12">
+					<h4 className="text-5xl text-white font-black">
+						{lang === "pt" && "PROJETOS"}
+						{lang === "en" && "PROJECTS"}
+					</h4>
+					<div className="mt-16 flex flex-col items-center h-full justify-center">
+						<img src={no_projects} alt="Trabalhando nos projetos..." className="h-56" />
+						<p className="w-5/6 mt-2 text-white text-xl text-center font-bold">O código dos projetos aparecerão aqui em breve...</p>
+					</div>
+				</div>
+				<div className="lg:w-2/3">
+					<h5 className="text-lg text-white font-bold lg:mt-5">PROTÓTIPOS</h5>
+
+					<HorizontalScroll className="hidden lg:block mt-10">
+						{projectsList.map(project => {
+							return (
+								<div className="flex flex-col items-start justify-center text-white mr-10 self-start">
+									<div style={{
+										backgroundImage: `url(${project.image})`,
+										backgroundPosition: "center",
+										backgroundColor: "#E5E5E5",
+										backgroundSize: "contain",
+										backgroundRepeat: "no-repeat",
+									}} className="h-[30rem] w-[35rem] rounded-xl" />
+									<div className="mt-5">
+										<p className="font-black text-2xl">{project.title}</p>
+										<span className="text-base">{project.description[lang]}</span>
+									</div>
+								</div>
+							);
+						})}
+					</HorizontalScroll>
+
+					<ScrollArea.Root className="lg:hidden !static h-[40rem] overflow-hidden mt-10">
+						<ScrollArea.Viewport ref={scrollChat} className="w-full h-full">
+							<div className="flex">
+								{projectsList.map(project => {
+									return (
+										<div className="flex flex-col items-start justify-center text-white mr-10 self-start">
+											<div style={{
+												backgroundImage: `url(${project.image})`,
+												backgroundPosition: "center",
+												backgroundColor: "#E5E5E5",
+												backgroundSize: "contain",
+												backgroundRepeat: "no-repeat",
+											}} className="h-[30rem] w-[35rem] rounded-xl" />
+											<div className="mt-5">
+												<p className="font-black text-2xl">{project.title}</p>
+												<span className="text-base">{project.description[lang]}</span>
+											</div>
+										</div>
+									);
+								})}
+							</div>
+						</ScrollArea.Viewport>
+						<ScrollArea.Scrollbar orientation="vertical">
+							<ScrollArea.Thumb />
+						</ScrollArea.Scrollbar>
+						<ScrollArea.Scrollbar orientation="horizontal">
+							<ScrollArea.Thumb />
+						</ScrollArea.Scrollbar>
+						<ScrollArea.Corner />
+					</ScrollArea.Root>
+				</div>
+			</section>
+			
 			<section className="flex flex-col lg:flex-row bg-white px-12 py-24 2xl:px-80 gap-24" id="contact">
-				<div className="lg:w-2/5 text-5xl text-secondary font-black">
-					<h4>
+				<div className="lg:w-2/5">
+					<h4 className="text-5xl text-secondary font-black">
 						{lang === "pt" && "HABILIDADES"}
 						{lang === "en" && "ABILITIES"}
 					</h4>
+
+					<ScrollArea.Root className="!static h-[54rem] overflow-hidden">
+					
+						<ScrollArea.Viewport className="w-full h-full mt-5 py-2">
+							{abilitiesList.map(field => {
+								return (
+									<div key={field.field.en} className=" mt-5 mb-10">
+										<p className="text-base italic text-dark mb-5 font-bold">{field.field[lang]}</p>
+										<div>
+											{field.abilities.map((ability, i) => {
+												return (
+													<div
+														key={ability.ability.en}
+														className={clsx("w-full h-28 flex flex-col justify-end p-4 mt-5 rounded-md", {
+															"bg-blue-200": ability.level.en === "Basic",
+															"bg-blue-300": ability.level.en === "Intermediary",
+															"bg-blue-400": ability.level.en === "Advanced",
+														})}
+													>
+														<p className="text-xl text-dark font-bold">{ability.ability[lang]}</p>
+														<span className="text-sm text-dark/40">{ability.level[lang]}</span>
+													</div>
+												);
+											})}
+										</div>
+									</div>
+								);
+							})}		
+						</ScrollArea.Viewport>
+							
+						
+						<ScrollArea.Scrollbar orientation="vertical">
+							<ScrollArea.Thumb />
+						</ScrollArea.Scrollbar>
+						<ScrollArea.Scrollbar orientation="horizontal">
+							<ScrollArea.Thumb />
+						</ScrollArea.Scrollbar>
+						<ScrollArea.Corner />
+					</ScrollArea.Root>
 				</div>
 				<div className="lg:w-3/5">
 					<div>
@@ -274,10 +385,7 @@ function App() {
 									{lang === "pt" && "CONTATE-ME"}
 									{lang === "en" && "CONTACT ME"}
 								</h4>
-								<p className="text-sm lg:text-base">
-									{lang === "pt" && "Feito por MIM"}
-									{lang === "en" && "Powered by ME"}
-								</p>
+								<p className="text-sm lg:text-base">Powered by ME</p>
 							</div>
 							<div className="flex lg:items-center lg:gap-2 font-bold flex-col lg:flex-row items-end">
 								<div className="order-2 lg:order-1">
@@ -313,8 +421,8 @@ function App() {
 					</div>
 				</div>
 			</section>
-			<footer className="bg-dark px-12 py-8 2xl:px-80 flex justify-between">
-				<div className="flex items-center gap-5">
+			<footer className="bg-dark px-12 py-8 2xl:px-80 flex flex-col lg:flex-row justify-between">
+				<div className="flex items-center gap-3 justify-center order-3 lg:order-1">
 					<img src={logo} alt="Logo" className="h-7" />
 					<span className="text-white flex items-center gap-1">
 						{lang === "pt" && "Todos os direitos reservados"}
@@ -322,7 +430,7 @@ function App() {
 						<Copyright size={16} />
 					</span>
 				</div>
-				<div className="flex items-center gap-10">
+				<div className="flex flex-col lg:flex-row items-center gap-2 lg:gap-10 mb-5 lg:m-0 order-2 lg:order-1">
 					<a href="tel:71984788575" className="text-white flex items-center gap-2">
 						<Phone size={24} weight="fill" />
 						<span>(71) 9 8478-8575</span>
@@ -336,10 +444,10 @@ function App() {
 						<span>Costa Azul, Salvador - BA</span>
 					</a>
 				</div>
-				<div className="text-white flex gap-5 items-center">
-					<a href="https://instagram.com/eiandreojr" target="__blank"><InstagramLogo size={24} weight="fill" className="text-pink-400" /></a>
-					<a href="https://linkedin.com/in/andreojr" target="__blank"><LinkedinLogo size={24} weight="fill" className="text-blue-400" /></a>
-					<a href="https://wa.me/5571984760838?text=Ol%C3%A1%2C+Andr%C3%A9%21+Temos+uma+oportunidade+para+voc%C3%AA." target="__blank"><WhatsappLogo size={24} weight="fill" className="text-green-500" /></a>
+				<div className="text-white flex gap-5 items-center justify-center order-2 mb-5 lg:m-0 lg:order-3">
+					<a href="https://instagram.com/eiandreojr" target="__blank"><InstagramLogo size={32} weight="fill" className="text-pink-400" /></a>
+					<a href="https://linkedin.com/in/andreojr" target="__blank"><LinkedinLogo size={32} weight="fill" className="text-blue-400" /></a>
+					<a href="https://wa.me/5571984760838?text=Ol%C3%A1%2C+Andr%C3%A9%21+Temos+uma+oportunidade+para+voc%C3%AA." target="__blank"><WhatsappLogo size={32} weight="fill" className="text-green-500" /></a>
 				</div>
 			</footer>
 		</div>

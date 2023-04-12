@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { MessageBox } from "./MessageBox";
 import { api } from "../lib/api";
 import { MessagesProps } from "../App";
-import { socketIo } from "../lib/socketIo";
+import { socketIo } from "../lib/api";
 
 interface ChatProps {
     ip: string;

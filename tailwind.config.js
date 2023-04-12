@@ -9,6 +9,7 @@ export default {
 			colors: {
 				"primary": "#0081C9",
 				"secondary": "#FFC93C",
+				"terciary": "#FD4C4C",
 				"dark": "#222222"
 			},
 			animation: {
