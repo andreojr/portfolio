@@ -8,7 +8,7 @@ import githublogo from "./assets/github.svg";
 import group_technologies from "./assets/group_technologies.svg";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ArrowDown, CaretDown, Clock, Copyright, Envelope, InstagramLogo, LinkedinLogo, List, MapPin, Phone, WhatsappLogo } from "@phosphor-icons/react";
+import { ArrowDown, CaretDown, Clock, Copyright, Envelope, GithubLogo, InstagramLogo, LinkedinLogo, List, MapPin, Phone, WhatsappLogo } from "@phosphor-icons/react";
 import aprovacao_ufba from "./assets/aprovacao_ufba.svg" ;
 import no_projects from "./assets/no-projects.svg"
 
@@ -114,7 +114,7 @@ function App() {
 											</li>
 											<li className="cursor-pointer flex gap-1 items-center">
 												<Code size={24} />
-												<a href="#">
+												<a href="#projects">
 													{lang === "pt" && "Projetos"}
 													{lang === "en" && "Projects"}
 												</a>
@@ -143,18 +143,18 @@ function App() {
 							<div>
 								<img className="h-32 lg:h-52 my-5" src={name} alt="André Luiz de Oliveira Júnior" />
 								<div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-0 lg:justify-between mt-8 lg:mt-16">
-									<button className="w-full lg:w-52 h-16 rounded-full border-4 border-white flex justify-center group">
+									<a href="#contact" className="w-full lg:w-52 h-16 rounded-full border-4 border-white flex justify-center group">
 										<div className="w-full h-14 rounded-full bg-white border-4 border-dark flex items-center justify-center group-hover:drop-shadow-[0_15px_15px_rgba(0,0,0,0.25)] transition-all">
 											<span className="text-dark font-black text-xl">
 												{lang === "pt" && "Contrate-me"}
 												{lang === "en" && "Hire me"}
 											</span>
 										</div>
-									</button>
+									</a>
 									<a href="https://github.com/andreojr/portfolio-web" target="blank" className="flex items-center text-2xl ml-4 text-white hover:drop-shadow-[0_5px_5px_rgba(0,0,0,0.25)] transition-all">
 										{lang === "pt" && "Código do site"}
 										{lang === "en" && "Site code"}
-										<img className="ml-2 h-10" src={githublogo} alt="GitHub Logo" />
+										<GithubLogo weight="fill" className="ml-2" size={32} />
 									</a>
 								</div>
 							</div>
@@ -172,7 +172,7 @@ function App() {
 								</a>
 							</li>
 							<li className="cursor-pointer flex gap-1 items-center"><Code size={24} />
-								<a href="#">
+								<a href="#projects">
 									{lang === "pt" && "Projetos"}
 									{lang === "en" && "Projects"}
 								</a>
@@ -264,7 +264,7 @@ function App() {
 				</div>
 			</section>
 
-			<section className="flex flex-col lg:flex-row bg-terciary pl-12 pt-24 lg:pb-24 2xl:pl-80 gap-24 w-full">
+			<section id="projects" className="flex flex-col lg:flex-row bg-terciary pl-12 pt-24 lg:pb-24 2xl:pl-80 gap-24 w-full">
 				<div className="lg:w-1/3 flex flex-col pr-12">
 					<h4 className="text-5xl text-white font-black">
 						{lang === "pt" && "PROJETOS"}
