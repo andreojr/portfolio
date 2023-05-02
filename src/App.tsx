@@ -272,7 +272,14 @@ function App() {
 					</h4>
 					<div className="mt-16 flex flex-col items-center h-full justify-center">
 						<img src={no_projects} alt="Trabalhando nos projetos..." className="h-56" />
-						<p className="w-5/6 mt-2 text-white text-xl text-center font-bold">O código dos projetos aparecerão aqui em breve...</p>
+						<a href="https://linktr.ee/andreojr" target="__blank" className="w-5/6 mt-4 h-16 rounded-full border-4 border-white flex justify-center group">
+							<div className="w-full h-14 rounded-full bg-white border-4 border-primary flex items-center justify-center group-hover:drop-shadow-[0_15px_15px_rgba(0,0,0,0.25)] transition-all">
+								<span className="text-primary font-black text-xl">
+									{lang === "pt" && "Ver projetos"}
+									{lang === "en" && "See projects"}
+								</span>
+							</div>
+						</a>
 					</div>
 				</div>
 				<div className="lg:w-2/3">
