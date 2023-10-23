@@ -10,6 +10,7 @@ import alura_node_mysql from "../assets/certificates/alura_node_mysql.jpg";
 import alura_node_stream_repositorio from "../assets/certificates/alura_node_stream_repositorio.jpg";
 import alura_node_auth_tokens from "../assets/certificates/alura_node_auth_tokens.jpg";
 import alura_node_refresh_token from "../assets/certificates/alura_node_refresh_token.jpg";
+import alura_dart_oo from "../assets/certificates/alura_dart_oo.png";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 import { useState } from "react";
@@ -33,6 +34,7 @@ export function Certificates({ lang }: CertificatesProps) {
 		alura_node_stream_repositorio,
 		alura_node_auth_tokens,
 		alura_node_refresh_token,
+		alura_dart_oo,
 	];
 
 	return (
