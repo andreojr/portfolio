@@ -40,8 +40,8 @@ export const abilitiesList: abilitiesListProps = [
                     en: "TypeScript",
                 },
                 level: {
-                    pt: "Intermediário",
-                    en: "Intermediary",
+                    pt: "Avançado",
+                    en: "Advanced",
                 },
                 color: "",
             },
@@ -51,8 +51,8 @@ export const abilitiesList: abilitiesListProps = [
                     en: "Python",
                 },
                 level: {
-                    pt: "Básico",
-                    en: "Basic",
+                    pt: "Intermediário",
+                    en: "Intermediary",
                 },
                 color: "",
             },
@@ -73,8 +73,8 @@ export const abilitiesList: abilitiesListProps = [
                     en: "Object Oriented Programming",
                 },
                 level: {
-                    pt: "Intermediário",
-                    en: "Intermediary",
+                    pt: "Avançado",
+                    en: "Advanced",
                 },
                 color: "",
             },
@@ -103,6 +103,17 @@ export const abilitiesList: abilitiesListProps = [
                     en: "ReactJS",
                 },
                 level: {
+                    pt: "Avançado",
+                    en: "Advanced",
+                },
+                color: "",
+            },
+            {
+                ability: {
+                    pt: "NextJS",
+                    en: "NextJS",
+                },
+                level: {
                     pt: "Intermediário",
                     en: "Intermediary",
                 },
@@ -118,8 +129,19 @@ export const abilitiesList: abilitiesListProps = [
         abilities: [
             {
                 ability: {
-                    pt: "NodeJS",
-                    en: "NodeJS",
+                    pt: "Express",
+                    en: "Express",
+                },
+                level: {
+                    pt: "Avançado",
+                    en: "Advanced",
+                },
+                color: "",
+            },
+            {
+                ability: {
+                    pt: "NestJS",
+                    en: "NestJS",
                 },
                 level: {
                     pt: "Avançado",
@@ -171,8 +193,8 @@ export const abilitiesList: abilitiesListProps = [
                     en: "Relational Teory",
                 },
                 level: {
-                    pt: "Intermediário",
-                    en: "Intermediary",
+                    pt: "Avançado",
+                    en: "Advanced",
                 },
                 color: "",
             },
