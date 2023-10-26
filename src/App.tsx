@@ -151,7 +151,7 @@ function App() {
 											</span>
 										</div>
 									</a>
-									<a href="https://github.com/andreojr/portfolio-web" target="blank" className="flex items-center text-2xl ml-4 text-white hover:drop-shadow-[0_5px_5px_rgba(0,0,0,0.25)] transition-all">
+									<a href="https://github.com/andreojr/portfolio" target="blank" className="flex items-center text-2xl ml-4 text-white hover:drop-shadow-[0_5px_5px_rgba(0,0,0,0.25)] transition-all">
 										{lang === "pt" && "Código do site"}
 										{lang === "en" && "Site code"}
 										<GithubLogo weight="fill" className="ml-2" size={32} />
